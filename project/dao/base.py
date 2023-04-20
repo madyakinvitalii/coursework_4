@@ -24,7 +24,7 @@ class BaseDAO(Generic[T]):
     def get_by_id(self, pk: int) -> Optional[T]:
         return self._db_session.query(self.__model__).get(pk)
 
-    def get_by_email(self, mail: str):
+    def get_by_email(self, mail: str) -> Optional[T]:
         return self._db_session.query(self.__model__).filter(self.__model__.email == mail).first_or_404()
 
     def get_all(self, page: Optional[int] = None, status: Optional[str] = None) -> List[T]:

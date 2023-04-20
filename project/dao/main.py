@@ -1,3 +1,5 @@
+from typing import Optional
+
 from project.dao.base import BaseDAO
 from project.models import Genre, Director, Movie, User
 
@@ -22,3 +24,17 @@ class UsersDAO(BaseDAO[User]):
         self._db_session.add(ent)
         self._db_session.commit()
         return ent
+
+    def update(self, user_d, user):
+        user.name = user_d.get("name")
+        user.surname = user_d.get("surname")
+        user.favorite_genre = user_d.get("favorite_genre")
+
+        self._db_session.add(user)
+        self._db_session.commit()
+
+    def change_pwd(self, new_password, user):
+        user.password = new_password
+
+        self._db_session.add(user)
+        self._db_session.commit()

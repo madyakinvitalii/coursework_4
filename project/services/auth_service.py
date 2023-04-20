@@ -15,7 +15,7 @@ class AuthsService:
     def __init__(self, dao: UsersDAO) -> None:
         self.dao = dao
 
-    def get_user(self, mail: str) -> User:
+    def get_user_by_mail(self, mail: str) -> User:
         print(self, mail)
         if user := self.dao.get_by_email(mail):
             return user
@@ -29,7 +29,7 @@ class AuthsService:
 
     def generate_tokens(self, mail, password, is_refresh=False):
 
-        user = self.get_user(mail)
+        user = self.get_user_by_mail(mail)
 
         if user is None:
             raise abort(404)
